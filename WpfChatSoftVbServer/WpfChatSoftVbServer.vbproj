@@ -121,5 +121,11 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WpfChatSoftVbClient\WpfChatSoftVbClient.vbproj">
+      <Project>{9a278c03-f902-4ab0-abc3-f3481fd94c3b}</Project>
+      <Name>WpfChatSoftVbClient</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

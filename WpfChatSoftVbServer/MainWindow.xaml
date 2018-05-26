@@ -14,31 +14,31 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="45*"/>
         </Grid.RowDefinitions>
-        <Button Content="Button" Grid.Row="1"
+        <Button x:Name="BtnStopServer" Content="关闭服务器" Grid.Row="1"
                 HorizontalAlignment="Left" 
                 Margin="10,10,0,0" 
                 VerticalAlignment="Top" 
                 Width="75"
                 />
-        <Button Content="Button" Grid.Row="1"
+        <Button x:Name="BtnStartServer" Content="启动服务器" Grid.Row="1"
                 HorizontalAlignment="Right" 
                 Margin="0,10,10,0" 
                 VerticalAlignment="Top" 
                 Width="75"
                 />
-        <Button Content="Button" Grid.Row="3"
+        <Button x:Name="BtnSendMsg" Content="发送" Grid.Row="3"
                 HorizontalAlignment="Right" 
                 Margin="0,10,10,0"  
                 VerticalAlignment="Top" 
                 Width="75"
                 />
-        <TextBox HorizontalAlignment="Stretch" Grid.Row="2"
+        <TextBox x:Name="TxtShow" HorizontalAlignment="Stretch" Grid.Row="2"
                  Margin="10,10,10,10" 
                  TextWrapping="Wrap" 
                  VerticalAlignment="Stretch" 
                  IsReadOnly="True"
                  />
-        <TextBox HorizontalAlignment="Stretch" Grid.Row="4"
+        <TextBox x:Name="TxtInput" HorizontalAlignment="Stretch" Grid.Row="4"
                  Margin="10,10,10,10"  
                  TextWrapping="Wrap" 
                  VerticalAlignment="Stretch" 
