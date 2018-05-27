@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfChatSoftVbClient"
         mc:Ignorable="d"
-        Title="MainWindow" Height="522.514" Width="629.776">
+        Title="客户端" Height="522.514" Width="629.776">
     <Grid>
 
     </Grid>

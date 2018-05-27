@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfChatSoftVbServer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="671.451" Width="667.981">
+        Title="服务器" Height="671.451" Width="667.981">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1"/>
@@ -41,7 +41,7 @@
         <TextBox x:Name="TxtInput" HorizontalAlignment="Stretch" Grid.Row="4"
                  Margin="10,10,10,10"  
                  TextWrapping="Wrap" 
-                 VerticalAlignment="Stretch" 
+                 VerticalAlignment="Stretch" AcceptsReturn="True" 
                  />
 
     </Grid>
