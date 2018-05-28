@@ -1,7 +1,6 @@
 ﻿Imports System.Net
 Imports System.Net.Sockets
 Imports System.Threading
-Imports System.Threading.Thread
 Imports System.Windows.Threading
 
 Class MainWindow
@@ -44,17 +43,19 @@ Class MainWindow
             .IsBackground = True
         }
         ConnThread.Start()
+
+        Keyboard.Focus(TxtInput)
     End Sub
 
     Private Sub Connect()
         While IsServerStarted.Equals(True)
-            DlgShowMsg("启动测试...")
+            ShowMsgDelegate("启动测试...")
             IsServerStarted = False
         End While
     End Sub
 
     Private Sub BtnSendMsg_Click(sender As Object, e As RoutedEventArgs) Handles BtnSendMsg.Click
-        If TxtInput.Text.Length <> 0 Then
+        If TxtInput.Text.Trim.Length <> 0 Then
             ShowMsg(TxtInput.Text & vbCrLf & "字符数: " & TxtInput.Text.Length.ToString)
         End If
         ClearInputBox()
@@ -69,7 +70,7 @@ Class MainWindow
 
     Delegate Sub MsgDelegate(ByVal msg As String)
 
-    Private Sub DlgShowMsg(ByVal msg As String)
+    Private Sub ShowMsgDelegate(ByVal msg As String)
         Me.Dispatcher.BeginInvoke(DispatcherPriority.Normal, New MsgDelegate(AddressOf ShowMsg), msg)
     End Sub
 
@@ -79,5 +80,6 @@ Class MainWindow
 
     Private Sub ClearInputBox()
         TxtInput.Text = vbNullString
+        Keyboard.Focus(TxtInput)
     End Sub
 End Class
