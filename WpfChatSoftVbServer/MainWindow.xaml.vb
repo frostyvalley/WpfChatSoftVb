@@ -2,6 +2,7 @@
 Imports System.Net.Sockets
 Imports System.Threading
 Imports System.Threading.Thread
+Imports System.Windows.Threading
 
 Class MainWindow
 
@@ -42,7 +43,7 @@ Class MainWindow
         ConnThread = New Thread(AddressOf Connect) With {
             .IsBackground = True
         }
-        'ConnThread.Start()
+        ConnThread.Start()
     End Sub
 
     Private Sub Connect()
@@ -59,11 +60,17 @@ Class MainWindow
         ClearInputBox()
     End Sub
 
+    'Delegate Sub MsgDelegate(ByVal msg As String)
+
+    'Private Sub DlgShowMsg(ByVal msg As String)
+    '    Dim MsgDlg As New MsgDelegate(AddressOf ShowMsg)
+    '    MsgDlg.Invoke("aha")
+    'End Sub
+
     Delegate Sub MsgDelegate(ByVal msg As String)
 
     Private Sub DlgShowMsg(ByVal msg As String)
-        Dim MsgDlg As New MsgDelegate(AddressOf ShowMsg)
-        MsgDlg.Invoke("aha")
+        Me.Dispatcher.BeginInvoke(DispatcherPriority.Normal, New MsgDelegate(AddressOf ShowMsg), msg)
     End Sub
 
     Private Sub ShowMsg(ByVal msg As String)
