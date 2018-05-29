@@ -10,13 +10,17 @@ Class MainWindow
     Private ServerPort As String = "8099"
     Private ServerAddress As IPAddress
     Private ServerEndPoint As IPEndPoint
-
-    Private Backlog As Integer = 2
+    Private Backlog As Integer = 0
 
     Private ConnSocket As Socket
     Private ConnThread As Thread
 
+    Private ClientEndPoint As IPEndPoint
+    Private ClientAddress As IPAddress
+    Private ClientPort As String
+
     Private IsServerStarted As Boolean = False
+    Private isClientConnected As Boolean = False
 
     Public Sub New()
         StartClient()
@@ -49,9 +53,29 @@ Class MainWindow
 
     Private Sub Connect()
         While IsServerStarted.Equals(True)
-            ShowMsgDelegate("启动测试...")
-            IsServerStarted = False
+            ConnSocket = ServerSocket.Accept
+            ClientEndPoint = ConnSocket.RemoteEndPoint
+            ClientAddress = ClientEndPoint.Address
+            ClientPort = ClientEndPoint.Port.ToString
+
+            ShowMsgDelegate("客户端连接")
+            ShowMsgDelegate("Client Addr: " & ClientEndPoint.ToString)
         End While
+    End Sub
+
+    Private Sub BtnStopServer_Click(sender As Object, e As RoutedEventArgs) Handles BtnStopServer.Click
+        If ConnSocket IsNot Nothing Then
+            ConnSocket.Close()
+            ConnSocket = Nothing
+        End If
+        If ServerSocket IsNot Nothing Then
+            ConnThread.Abort()
+            ConnThread = Nothing
+            ServerSocket.Close()
+            IsServerStarted = False
+            ServerSocket = Nothing
+        End If
+        ShowMsg("服务器关闭")
     End Sub
 
     Private Sub BtnSendMsg_Click(sender As Object, e As RoutedEventArgs) Handles BtnSendMsg.Click
