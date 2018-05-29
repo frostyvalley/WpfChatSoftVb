@@ -103,7 +103,7 @@ Class MainWindow
     '    MsgDlg.Invoke("aha")
     'End Sub
 
-    Delegate Sub MsgDelegate(ByVal msg As String)
+    Private Delegate Sub MsgDelegate(ByVal msg As String)
 
     Private Sub ShowMsgDelegate(ByVal msg As String)
         Me.Dispatcher.BeginInvoke(DispatcherPriority.Normal, New MsgDelegate(AddressOf ShowMsg), msg)
