@@ -7,6 +7,36 @@
         mc:Ignorable="d"
         Title="客户端" Height="522.514" Width="629.776">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="55*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="45*"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="BtnSendMsg" Grid.Row="2" 
+                Content="发送" 
+                HorizontalAlignment="Right" 
+                Margin="0,10,10,0" 
+                VerticalAlignment="Top"
+                Width="75"
+                />
+        <TextBox x:Name="TxtShow" Grid.Row="1" 
+                 HorizontalAlignment="Stretch" 
+                 Margin="10,10,10,10" 
+                 TextWrapping="Wrap" 
+                 VerticalAlignment="Stretch" 
+                 />
+        <TextBox x:Name="TxtInput" Grid.Row="3" 
+                 HorizontalAlignment="Stretch" 
+                 Margin="10,10,10,10" 
+                 TextWrapping="Wrap" 
+                 VerticalAlignment="Stretch" 
+                 />
+        <Button x:Name="BtnConnectServe" Grid.Row="2"
+                Content="连接服务器" 
+                HorizontalAlignment="Left" 
+                Margin="10,10,0,0" 
+                VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>

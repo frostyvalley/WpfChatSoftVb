@@ -1,5 +1,6 @@
 ﻿Imports System.Net
 Imports System.Net.Sockets
+Imports System.Text
 Imports System.Threading
 Imports System.Windows.Threading
 
@@ -8,7 +9,7 @@ Class MainWindow
     Private ServerSocket As Socket
     Private ServerIP As String = "127.0.0.1"
     Private ServerPort As String = "8099"
-    Private ServerAddress As IPAddress
+    Private ServerAddress As IPAddress = IPAddress.Parse(ServerIP)
     Private ServerEndPoint As IPEndPoint
     Private Backlog As Integer = 0
 
@@ -33,7 +34,6 @@ Class MainWindow
 
     Private Sub BtnStartServer_Click(sender As Object, e As RoutedEventArgs) Handles BtnStartServer.Click
         If ServerSocket Is Nothing Then
-            ServerAddress = IPAddress.Parse(ServerIP)
             ServerEndPoint = New IPEndPoint(ServerAddress, Integer.Parse(ServerPort))
             ServerSocket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
             ServerSocket.Bind(ServerEndPoint)
@@ -60,6 +60,8 @@ Class MainWindow
 
             ShowMsgDelegate("客户端连接")
             ShowMsgDelegate("Client Addr: " & ClientEndPoint.ToString)
+
+            ConnSocket.Send(Encoding.UTF8.GetBytes("与服务器连接成功..."))
         End While
     End Sub
 
