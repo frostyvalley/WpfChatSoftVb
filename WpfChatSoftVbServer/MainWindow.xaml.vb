@@ -61,6 +61,15 @@ Class MainWindow
         ClearInputBox()
     End Sub
 
+    Private Sub TxtInput_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtInput.KeyDown
+        If e.Key = Key.Enter Then
+            If TxtInput.Text.Trim.Length <> 0 Then
+                ShowMsg(TxtInput.Text & vbCrLf & "字符数: " & TxtInput.Text.Length.ToString)
+            End If
+            ClearInputBox()
+        End If
+    End Sub
+
     'Delegate Sub MsgDelegate(ByVal msg As String)
 
     'Private Sub DlgShowMsg(ByVal msg As String)
@@ -76,6 +85,7 @@ Class MainWindow
 
     Private Sub ShowMsg(ByVal msg As String)
         TxtShow.AppendText(msg & vbCrLf)
+        TxtShow.ScrollToEnd()
     End Sub
 
     Private Sub ClearInputBox()

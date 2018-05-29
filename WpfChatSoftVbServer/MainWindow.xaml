@@ -41,7 +41,7 @@
         <TextBox x:Name="TxtInput" HorizontalAlignment="Stretch" Grid.Row="4"
                  Margin="10,10,10,10"  
                  TextWrapping="Wrap" 
-                 VerticalAlignment="Stretch" AcceptsReturn="True" 
+                 VerticalAlignment="Stretch" 
                  />
 
     </Grid>
