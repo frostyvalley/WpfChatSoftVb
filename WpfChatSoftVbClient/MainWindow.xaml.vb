@@ -1,5 +1,6 @@
 ﻿Imports System.Net
 Imports System.Net.Sockets
+Imports System.Text
 Imports System.Threading
 
 Class MainWindow
@@ -10,9 +11,12 @@ Class MainWindow
     Private ServerPort As String = "8099"
     Private ServerEndPoint As IPEndPoint
 
+    Private isServerConnected = False
+
     Private ClientSocket As Socket
 
     Private ConnThread As Thread
+    Private Buffer(2048) As Byte
 
     Private Sub BtnConnectServe_Click(sender As Object, e As RoutedEventArgs) Handles BtnConnectServe.Click
         ServerEndPoint = New IPEndPoint(ServerAddress, Integer.Parse(ServerPort))
@@ -20,6 +24,7 @@ Class MainWindow
         Try
             ClientSocket.Connect(ServerEndPoint)
             ShowMsg("服务器连接成功")
+            isServerConnected = True
         Catch ex As Exception
             ShowMsg("连接错误: 服务器丢失")
             Keyboard.Focus(BtnConnectServe)
@@ -32,8 +37,14 @@ Class MainWindow
     End Sub
 
     Private Sub ReceiveMsg()
-
+        While isServerConnected
+            Dim msg As String = Encoding.Default.GetString(Buffer)
+        End While
     End Sub
+
+    Private Delegate Sub MsgDelegate(ByVal msg As String)
+
+
 
     Private Sub ShowMsg(msg As String)
         TxtShow.AppendText(msg & vbCrLf)

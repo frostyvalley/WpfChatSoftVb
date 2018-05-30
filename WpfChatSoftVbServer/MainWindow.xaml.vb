@@ -52,8 +52,9 @@ Class MainWindow
     End Sub
 
     Private Sub Connect()
-        While IsServerStarted.Equals(True)
+        While IsServerStarted
             ConnSocket = ServerSocket.Accept
+            isClientConnected = True
             ClientEndPoint = ConnSocket.RemoteEndPoint
             ClientAddress = ClientEndPoint.Address
             ClientPort = ClientEndPoint.Port.ToString
@@ -62,6 +63,8 @@ Class MainWindow
             ShowMsgDelegate("Client Addr: " & ClientEndPoint.ToString)
 
             ConnSocket.Send(Encoding.UTF8.GetBytes("与服务器连接成功..."))
+
+            ShowMsgDelegate("客户端断开连接")
         End While
     End Sub
 
