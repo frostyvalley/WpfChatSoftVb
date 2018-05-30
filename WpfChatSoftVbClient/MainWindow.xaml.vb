@@ -19,10 +19,11 @@ Class MainWindow
         ClientSocket = New Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)
         Try
             ClientSocket.Connect(ServerEndPoint)
+            ShowMsg("服务器连接成功")
         Catch ex As Exception
-
+            ShowMsg("连接错误: 服务器丢失")
+            Keyboard.Focus(BtnConnectServe)
         End Try
-
 
         ConnThread = New Thread(AddressOf ReceiveMsg) With {
             .IsBackground = True
@@ -35,6 +36,7 @@ Class MainWindow
     End Sub
 
     Private Sub ShowMsg(msg As String)
-        TxtShow.AppendText(msg & "\n")
+        TxtShow.AppendText(msg & vbCrLf)
+        Keyboard.Focus(TxtInput)
     End Sub
 End Class
