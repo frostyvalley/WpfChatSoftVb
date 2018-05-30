@@ -28,8 +28,8 @@ Class MainWindow
     End Sub
 
     Private Sub StartClient()
-        'Dim ClientWindoww As New WpfChatSoftVbClient.MainWindow
-        'ClientWindoww.Show()
+        Dim ClientWindoww As New WpfChatSoftVbClient.MainWindow
+        ClientWindoww.Show()
     End Sub
 
     Private Sub BtnStartServer_Click(sender As Object, e As RoutedEventArgs) Handles BtnStartServer.Click
