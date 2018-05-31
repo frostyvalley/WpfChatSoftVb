@@ -23,6 +23,9 @@ Class MainWindow
     Private IsServerStarted As Boolean = False
     Private isClientConnected As Boolean = False
 
+    Private MsgReceived As String
+    Private MsgToSend As String
+
     Public Sub New()
         StartClient()
     End Sub
@@ -84,17 +87,28 @@ Class MainWindow
     End Sub
 
     Private Sub BtnSendMsg_Click(sender As Object, e As RoutedEventArgs) Handles BtnSendMsg.Click
-        If TxtInput.Text.Trim.Length <> 0 Then
-            ShowMsg(TxtInput.Text & vbCrLf & "字符数: " & TxtInput.Text.Length.ToString)
+        If IsServerStarted Then
+            MsgToSend = TxtInput.Text.Trim
+            If MsgToSend.Length <> 0 Then
+                ShowMsg(TxtInput.Text & vbCrLf & "字符数: " & TxtInput.Text.Length.ToString)
+            End If
+            ClearInputBox()
+            ConnSocket.Send(Encoding.Default.GetBytes(MsgToSend))
+        Else
+
         End If
-        ClearInputBox()
     End Sub
 
     Private Sub TxtInput_KeyDown(sender As Object, e As KeyEventArgs) Handles TxtInput.KeyDown
         If e.Key = Key.Enter Then
-            If TxtInput.Text.Trim.Length <> 0 Then
+            MsgToSend = TxtInput.Text.Trim
+            If MsgToSend.Length <> 0 Then
                 ShowMsg(TxtInput.Text & vbCrLf & "字符数: " & TxtInput.Text.Length.ToString)
             End If
+            ClearInputBox()
+        End If
+        If IsServerStarted Then
+            ConnSocket.Send(Encoding.Default.GetBytes(MsgToSend))
         End If
     End Sub
 
@@ -114,7 +128,6 @@ Class MainWindow
     Private Sub ShowMsg(ByVal msg As String)
         TxtShow.AppendText(msg & vbCrLf)
         TxtShow.ScrollToEnd()
-        ClearInputBox()
     End Sub
 
     Private Sub ClearInputBox()
