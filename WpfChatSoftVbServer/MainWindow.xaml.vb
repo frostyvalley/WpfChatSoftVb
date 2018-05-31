@@ -62,9 +62,9 @@ Class MainWindow
             ShowMsgDelegate("客户端连接")
             ShowMsgDelegate("Client Addr: " & ClientEndPoint.ToString)
 
-            ConnSocket.Send(Encoding.UTF8.GetBytes("与服务器连接成功..."))
+            ConnSocket.Send(Encoding.Default.GetBytes("服务器返回确认信息"))
 
-            ShowMsgDelegate("客户端断开连接")
+            'ShowMsgDelegate("客户端断开连接")
         End While
     End Sub
 
@@ -95,7 +95,6 @@ Class MainWindow
             If TxtInput.Text.Trim.Length <> 0 Then
                 ShowMsg(TxtInput.Text & vbCrLf & "字符数: " & TxtInput.Text.Length.ToString)
             End If
-            ClearInputBox()
         End If
     End Sub
 
@@ -115,6 +114,7 @@ Class MainWindow
     Private Sub ShowMsg(ByVal msg As String)
         TxtShow.AppendText(msg & vbCrLf)
         TxtShow.ScrollToEnd()
+        ClearInputBox()
     End Sub
 
     Private Sub ClearInputBox()
