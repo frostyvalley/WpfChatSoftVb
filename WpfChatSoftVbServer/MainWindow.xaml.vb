@@ -106,9 +106,9 @@ Class MainWindow
                 ShowMsg(TxtInput.Text & vbCrLf & "字符数: " & TxtInput.Text.Length.ToString)
             End If
             ClearInputBox()
-        End If
-        If IsServerStarted Then
-            ConnSocket.Send(Encoding.Default.GetBytes(MsgToSend))
+            If IsServerStarted Then
+                ConnSocket.Send(Encoding.Default.GetBytes(MsgToSend))
+            End If
         End If
     End Sub
 
